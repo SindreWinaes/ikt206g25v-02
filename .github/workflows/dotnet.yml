@@ -24,6 +24,8 @@ jobs:
 
     - name: Build the solution
       run: dotnet build --configuration Release --no-restore
+      working-directory: ./ClassLibraryProjects
 
     - name: Run tests
       run: dotnet test --configuration Release --no-build --logger "console;verbosity=detailed"
+      working-directory: ./ClassLibraryProjects
