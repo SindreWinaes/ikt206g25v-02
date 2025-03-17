@@ -13,24 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository to the runner
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Setup .NET SDK (specify version you need, e.g., 9.0.x)
+     
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0.x'  # Adjust this to your desired .NET version.
 
-      # Step 3: Restore dependencies
-      - name: Restore dependencies
-        run: dotnet restore ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj  # Update path as needed.
-
-      # Step 4: Build the solution (without restoring again)
+     
       - name: Build the solution
         run: dotnet build ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj --configuration Release --no-restore
 
-      # Step 5: Run the tests (with detailed output)
+     )
       - name: Run tests
         run: dotnet test ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj --configuration Release --no-build --logger "console;verbosity=detailed"
