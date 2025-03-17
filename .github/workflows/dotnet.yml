@@ -28,3 +28,4 @@ jobs:
       - name: Run tests
         run: dotnet test --configuration Release --no-build --logger "console;verbosity=detailed"
         working-directory: ./ClassLibraryProjects/StringLibraryTest  # Run tests in the test project folder
+ 
