@@ -1,32 +1,31 @@
-name: .NET Build
+name: .NET Build and Test
 
 on:
   push:
     branches:
-      - main  # This can be any branch you're working on
+      - main  # You can change 'main' to the default branch you're using
   pull_request:
     branches:
-      - main  # This will trigger the action on new or updated PRs to the main branch
+      - main  # This triggers the workflow for pull requests to the 'main' branch
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # You can use other runners, but we'll use Ubuntu here
+  build-and-test:
+    runs-on: ubuntu-latest  # Using Ubuntu for this example, but you can choose other environments (e.g., windows-latest)
 
     steps:
-      # Step 1: Checkout the code from your repository
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # This checks out the code from the repository
 
-      # Step 2: Setup .NET SDK on the runner
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '9.0.x'  # Make sure to specify the .NET version you're using
+          dotnet-version: '9.0.x'  # Replace with your required .NET version
 
-      # Step 3: Restore dependencies (download packages specified in .csproj or .sln)
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ClassLibraryProjects/StringLibrary/StringLibrary.csproj  # This restores NuGet dependencies
 
-      # Step 4: Build the project
       - name: Build project
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build ClassLibraryProjects/StringLibrary/StringLibrary.csproj --configuration Release --no-restore  # This builds the project
+
+      - name: Run tests
+        run: dotnet test ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj --configuration Release --no-build --logger "console;verbosity=detailed"  # Run tests using MSTest
