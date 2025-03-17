@@ -1,3 +1,5 @@
+//ikt206g25v-02/ClassLibraryProjects/StringLibrary/Class1.cs
+
 ﻿using System;
 
 namespace UtilityLibraries
