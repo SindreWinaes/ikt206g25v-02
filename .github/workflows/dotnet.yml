@@ -4,28 +4,27 @@ on:
   push:
   pull_request:
 
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4 
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '9.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore ClassLibraryProjects/ClassLibraryProjects.csproj
-      working-directory: ./ClassLibraryProjects
+      - name: Restore dependencies
+        run: dotnet restore ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj  # Path to the test project
+        working-directory: ./ClassLibraryProjects/StringLibraryTest  # This points to the folder containing the .csproj file
 
-    - name: Build the solution
-      run: dotnet build --configuration Release --no-restore
-      working-directory: ./ClassLibraryProjects
+      - name: Build the solution
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ./ClassLibraryProjects/StringLibraryTest  # Build from the test project folder
 
-    - name: Run tests
-      run: dotnet test --configuration Release --no-build --logger "console;verbosity=detailed"
-      working-directory: ./ClassLibraryProjects
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --logger "console;verbosity=detailed"
+        working-directory: ./ClassLibraryProjects/StringLibraryTest  # Run tests in the test project folder
