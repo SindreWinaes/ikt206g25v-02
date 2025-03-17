@@ -18,14 +18,13 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj  # Path to the test project
-        working-directory: ./ClassLibraryProjects/StringLibraryTest  # This points to the folder containing the .csproj file
+        run: dotnet restore ./ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj  # Full relative path
+        working-directory: ./ClassLibraryProjects/StringLibraryTest  # Ensure this is the correct directory
 
       - name: Build the solution
         run: dotnet build --configuration Release --no-restore
-        working-directory: ./ClassLibraryProjects/StringLibraryTest  # Build from the test project folder
+        working-directory: ./ClassLibraryProjects/StringLibraryTest  # Building from the test project folder
 
       - name: Run tests
         run: dotnet test --configuration Release --no-build --logger "console;verbosity=detailed"
-        working-directory: ./ClassLibraryProjects/StringLibraryTest  # Run tests in the test project folder
- 
+        working-directory: ./ClassLibraryProjects/StringLibraryTest  # Running tests in the correct folder
