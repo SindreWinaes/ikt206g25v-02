@@ -3,29 +3,28 @@ name: .NET Build and Test
 on:
   push:
     branches:
-      - main  # You can change 'main' to the default branch you're using
+      - main  
   pull_request:
     branches:
-      - main  # This triggers the workflow for pull requests to the 'main' branch
+      - main  
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest  # Using Ubuntu for this example, but you can choose other environments (e.g., windows-latest)
+    runs-on: ubuntu-latest  
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # This checks out the code from the repository
+        uses: actions/checkout@v4  
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '9.0.x'  # Replace with your required .NET version
+          dotnet-version: '9.0.x'  
 
       - name: Restore dependencies
-        run: dotnet restore ClassLibraryProjects/StringLibrary/StringLibrary.csproj  # This restores NuGet dependencies
-
+        run: dotnet restore ClassLibraryProjects/StringLibrary/StringLibrary.csproj  
       - name: Build project
-        run: dotnet build ClassLibraryProjects/StringLibrary/StringLibrary.csproj --configuration Release --no-restore  # This builds the project
+        run: dotnet build ClassLibraryProjects/StringLibrary/StringLibrary.csproj --configuration Release --no-restore  
 
       - name: Run tests
-        run: dotnet test ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj --configuration Release --no-build --logger "console;verbosity=detailed"  # Run tests using MSTest
+        run: dotnet test ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj --configuration Release --no-build --logger "console;verbosity=detailed"  
