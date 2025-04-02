@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main  
+  workflow_dispatch:  # This allows you to trigger the workflow manually
 
 jobs:
   build-and-test:
@@ -27,4 +28,4 @@ jobs:
         run: dotnet build ClassLibraryProjects/StringLibrary/StringLibrary.csproj --configuration Release --no-restore  
 
       - name: Run tests
-        run: dotnet test ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj --configuration Release --no-build --logger "console;verbosity=detailed"  
+        run: dotnet test ClassLibraryProjects/StringLibraryTest/StringLibraryTest.csproj --configuration Release --no-build --logger "console;verbosity=detailed"
